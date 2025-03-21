@@ -8,10 +8,10 @@
 		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.mytaskmanager</groupId>
-	<artifactId>MyTaskManager</artifactId>
+	<groupId>com.mytasksmanager</groupId>
+	<artifactId>MyTasksManager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MyTaskManager</name>
+	<name>MyTasksManager</name>
 	<description> Api rest gestor de tareas</description>
 	<url/>
 	<licenses>
