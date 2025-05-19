@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mytasksmanager.model.Section;
 
@@ -22,7 +23,7 @@ public class SectionRepositoryImpl implements SectionRepository {
 	}
 
 	@Override
-	public String getNameSectionById(int id) {
+	public Optional<Section> getSectionById(Long id) {
 		
 		return sectionJpa.findById(id);
 	}
@@ -36,15 +37,18 @@ public class SectionRepositoryImpl implements SectionRepository {
 	}
 
 	@Override
-	public Section updateSection(Section section) {
+	public Optional<Section> updateSection(Section section) {
 		
-		return sectionJpa.save(section);
+		return Optional.ofNullable(sectionJpa.save(section));
 	}
+	
 
+	//@Transactional
 	@Override
-	public Section deleteSection(int id) {
+	public void deleteSection(Long id) {
 		
-		return sectionJpa.deleteById(id);
+		 sectionJpa.deleteById(id);
+
 	}
 
 }

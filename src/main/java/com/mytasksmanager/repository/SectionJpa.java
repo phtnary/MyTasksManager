@@ -1,5 +1,7 @@
 package com.mytasksmanager.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -10,9 +12,10 @@ import com.mytasksmanager.model.Section;
 public interface SectionJpa extends JpaRepository<Section, Integer> {
 
 	String findByName(String name);
-	String findById(int id);
-	//Section save(Section section);
-	Section deleteById(int id);
+	Optional<Section> findById(Long id);
+	void deleteById(Long id);
+	
+	
 
 	
 	
