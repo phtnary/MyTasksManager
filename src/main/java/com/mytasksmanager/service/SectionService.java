@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.mytasksmanager.model.Section;
 import com.mytasksmanager.repository.SectionRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class SectionService {
 
@@ -36,7 +38,7 @@ public class SectionService {
 	}
 	
 	
-	
+	@Transactional
 	public void deleteSection(Long id) {
 		
 		 sectionRepository.deleteSection(id);
