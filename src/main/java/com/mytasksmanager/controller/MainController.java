@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.mytasksmanager.model.Section;
-import com.mytasksmanager.service.SectionService;
+import com.mytasksmanager.service.SectionServiceImpl;
 
 import jakarta.validation.Valid;
 
@@ -25,7 +25,7 @@ public class MainController {
 	
 	
 	@Autowired
-	SectionService sectionService;
+	SectionServiceImpl sectionServiceImpl;
 
 	@GetMapping("/hello")
 	
@@ -41,13 +41,7 @@ public class MainController {
 	
 	public ResponseEntity <List <Section>> ShowSections() {
 	
-		List <Section> sections= sectionService.getAllSections();
-		
-		if (sections.isEmpty()) {
-			//return ResponseEntity.notFound().build();
-		   throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No hay elementos para ese criterio de búsqueda");
-		}
-	
+		List <Section> sections= sectionServiceImpl.getAllSections();
 		return ResponseEntity.ok(sections);
 		
 
@@ -58,7 +52,7 @@ public class MainController {
 	
 	public ResponseEntity <Section> createSection (@Valid @RequestBody Section section){
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(sectionService.addSection(section));
+				.body(sectionServiceImpl.addSection(section));
 		
 	}
 	
@@ -66,11 +60,8 @@ public class MainController {
 	@GetMapping("/section/{id:[0-9]+}")	
 	
 	public ResponseEntity<Section> getById (@PathVariable Long id){
-		//return ResponseEntity.of(sectionService.getSectionById(id));
-		if (sectionService.getSectionById(id).isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe section con ese id");
-		}
-		return ResponseEntity.of(sectionService.getSectionById(id));
+		
+		return ResponseEntity.of(sectionServiceImpl.getSectionById(id));
 								
 	}
 		
@@ -79,13 +70,13 @@ public class MainController {
 	
 	public ResponseEntity<Section> editSection(@Valid @RequestBody Section section){
 		
-		return ResponseEntity.of(sectionService.editSection(section));
+		return ResponseEntity.of(sectionServiceImpl.editSection(section));
 	}
 	
 	
 	@DeleteMapping("/section/{id:[0-9]+}")
 	public ResponseEntity<?> deleteSection(@PathVariable Long id){
-		sectionService.deleteSection(id);
+		sectionServiceImpl.deleteSection(id);
 		return ResponseEntity.noContent().build();
 		
 	}
